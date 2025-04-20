@@ -2,13 +2,12 @@
 ```
 project_template/
 ├── backend/                 # Go製のバックエンド（クリーンアーキテクチャ）
-│   ├── cmd/                 # エントリーポイント（main.goなど）
+│   ├── cmd/                 # エントリーポイント（main.goのみ、他処理はinternalに分離）
 │   │   └── api/             # API起動用のmainパッケージ
 │   ├── config/              # 設定に関する処理（環境変数の読み取りなど）
 │   ├── handler/             # HTTPリクエストの処理（エンドポイントの実装）
 │   ├── infrastructure/      # 外部サービスとのやりとりの実装
 │   │   └── db/              # データベースに関する処理
-│   │       ├── generated/   # sqlcなどで自動生成されたコード
 │   │       ├── query/       # SQLクエリファイル
 │   │       ├── init.sql     # テーブル定義
 │   │       ├── migration.go # テーブルマイグレーション処理
@@ -17,7 +16,10 @@ project_template/
 │   ├── repository_impl/     # リポジトリインターフェースの具体実装
 │   ├── usecase/             # ビジネスロジック（ユースケース層）
 │   ├── go.mod               # Goモジュールの設定ファイル（依存関係の管理など）
-│   └── tmp/                 # 一時ファイル置き場（airによるビルド結果など）
+│   ├── tmp/                 # 一時ファイル置き場（airによるビルド結果など）
+│   └── internal/            # アプリケーション内部ロジック（クリーンアーキテクチャ補助）
+│       ├── bootstrap/       # 初期化処理（DB接続、環境変数の読み込みなど）
+│       └── router/          # エンドポイントルーティングの設定
 ├── frontend/                # Next.js製のフロントエンド
 │   ├── public/              # 画像などの静的アセット
 │   └── src/
