@@ -10,7 +10,7 @@ task_timer/
 │   │   └── db/              # データベースに関する処理
 │   │       ├── generated/   # sqlcなどで自動生成されたコード
 │   │       ├── query/       # SQLクエリファイル
-│   │       ├── schema.sql   # テーブル定義
+│   │       ├── init.sql     # テーブル定義
 │   │       └── sqlc.yaml    # sqlcの設定ファイル
 │   ├── repository/          # ドメインレイヤーのインターフェース定義
 │   ├── repository_impl/     # リポジトリインターフェースの具体実装
