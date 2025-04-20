@@ -1,6 +1,6 @@
 ## Project Structure
 ```
-task_timer/
+project_template/
 ├── backend/                 # Go製のバックエンド（クリーンアーキテクチャ）
 │   ├── cmd/                 # エントリーポイント（main.goなど）
 │   │   └── api/             # API起動用のmainパッケージ
@@ -11,6 +11,7 @@ task_timer/
 │   │       ├── generated/   # sqlcなどで自動生成されたコード
 │   │       ├── query/       # SQLクエリファイル
 │   │       ├── init.sql     # テーブル定義
+│   │       ├── migration.go # テーブルマイグレーション処理
 │   │       └── sqlc.yaml    # sqlcの設定ファイル
 │   ├── repository/          # ドメインレイヤーのインターフェース定義
 │   ├── repository_impl/     # リポジトリインターフェースの具体実装

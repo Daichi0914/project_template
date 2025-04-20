@@ -24,4 +24,4 @@ COPY . .
 EXPOSE 8080
 
 # airでアプリ起動
-CMD ["air"]
+CMD ["sh", "-c", "go run cmd/api/main.go && air"]
