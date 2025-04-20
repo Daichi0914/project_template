@@ -8,7 +8,7 @@ import (
 )
 
 func RunMigration(db *sql.DB) {
-	sqlPath := filepath.Join("db", "init.sql")
+	sqlPath := filepath.Join("infrastructure", "db", "init.sql")
 	content, err := os.ReadFile(sqlPath)
 	if err != nil {
 		log.Fatalf("Failed to read migration file: %v", err)

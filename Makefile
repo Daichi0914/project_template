@@ -30,3 +30,6 @@ prune:
 	docker network prune -f
 	docker image prune -f
 	docker container prune -f
+
+exec_db:
+	set -a && source .env && set +a && docker compose exec db psql -U $$DB_USER -d $$DB_DB

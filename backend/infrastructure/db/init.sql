@@ -12,4 +12,5 @@ CREATE TABLE IF NOT EXISTS users (
 -- サンプルユーザーデータ
 INSERT INTO users (username, email)
 VALUES
-    ('demo_user', 'demo@example.com');
+    ('demo_user', 'demo@example.com')
+ON CONFLICT (username) DO NOTHING;
