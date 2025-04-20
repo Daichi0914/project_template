@@ -1,5 +1,5 @@
 export default function Home() {
   return (
-    <div>aaa</div>
+    <div>テンプレート</div>
   );
 }
