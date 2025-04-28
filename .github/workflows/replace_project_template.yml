@@ -7,9 +7,14 @@ on:
   repository_dispatch:
     types: [replace_project_template]
 
+permissions:
+  contents: write
+
 jobs:
   replace-template:
     runs-on: ubuntu-latest
+
+    if: github.repository != 'Daichi0914/project_template'
 
     steps:
       - name: Checkout repository
