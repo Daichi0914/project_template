@@ -1,6 +1,9 @@
 name: Replace project_template with Repository Name
 
 on:
+  push:
+    branches:
+      - main
   repository_dispatch:
     types: [replace_project_template]
 
@@ -20,7 +23,6 @@ jobs:
         run: |
           echo "Replacing project_template with ${REPO_NAME}"
 
-          # テキストファイルだけを対象に走査
           find . \
             -type f \
             ! -path "./.git/*" \
@@ -38,6 +40,11 @@ jobs:
                 echo "Skipping binary file $file"
               fi
             done
+
+      - name: Delete self workflow
+        run: |
+          echo "Deleting this workflow file..."
+          rm -f .github/workflows/replace_project_template.yml
 
       - name: Commit and push
         run: |
