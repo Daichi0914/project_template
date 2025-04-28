@@ -1,0 +1,48 @@
+name: Replace project_template with Repository Name
+
+on:
+  repository_dispatch:
+    types: [replace_project_template]
+
+jobs:
+  replace-template:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup environment variables
+        run: |
+          echo "REPO_NAME=$(basename $GITHUB_REPOSITORY)" >> $GITHUB_ENV
+
+      - name: Replace project_template safely
+        run: |
+          echo "Replacing project_template with ${REPO_NAME}"
+
+          # テキストファイルだけを対象に走査
+          find . \
+            -type f \
+            ! -path "./.git/*" \
+            ! -name "*.png" \
+            ! -name "*.jpg" \
+            ! -name "*.jpeg" \
+            ! -name "*.gif" \
+            ! -name "*.pdf" \
+            ! -name "*.zip" \
+            | while read file; do
+              if file "$file" | grep -q text; then
+                echo "Replacing in $file"
+                perl -pi -e "s/project_template/${REPO_NAME}/g" "$file"
+              else
+                echo "Skipping binary file $file"
+              fi
+            done
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "Replace 'project_template' with repository name '${REPO_NAME}'"
+          git push
