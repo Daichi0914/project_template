@@ -4,6 +4,10 @@ build:
 up:
 	docker compose up -d
 
+reup:
+	docker compose down -v
+	docker compose up -d
+
 logs:
 	docker compose logs -f
 
@@ -32,4 +36,7 @@ prune:
 	docker container prune -f
 
 exec_db:
-	set -a && source .env && set +a && docker compose exec db psql -U $$DB_USER -d $$DB_DB
+	set -a && source .env && set +a && docker compose exec db mysql -u$$DB_USER -p$$DB_PASSWORD $$DB_NAME
+
+seed:
+	set -a && source .env && set +a && docker compose exec -T db mysql -u$$DB_USER -p$$DB_PASSWORD $$DB_NAME < ./backend/infrastructure/db/seed/sample.sql

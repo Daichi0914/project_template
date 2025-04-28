@@ -2,7 +2,6 @@ package main
 
 import (
 	"database/sql"
-	"github.com/Daichi0914/project_template/infrastructure/db"
 	"log"
 	"net/http"
 
@@ -18,8 +17,6 @@ func main() {
 			log.Fatalf("Failed to close DB connection: %v", err)
 		}
 	}(dbConn)
-
-	db.RunMigration(dbConn)
 
 	r := router.New()
 	log.Println("Listening on :8080")

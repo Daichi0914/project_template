@@ -24,21 +24,22 @@ services:
     command: ["air"]
 
   db:
-    image: postgres:14
+    image: mysql:8
     restart: always
     env_file:
       - .env
     environment:
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_DB: ${DB_NAME}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
     ports:
-      - "5432:5432"
+      - "3306:3306"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
-      - ./backend/infrastructure/db/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - mysql_data:/var/lib/mysql
+      - ./backend/infrastructure/db/migration:/docker-entrypoint-initdb.d
 
 volumes:
-  postgres_data:
+  mysql_data:
   frontend_node_modules:
   backend_tmp:

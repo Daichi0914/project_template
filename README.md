@@ -8,12 +8,9 @@ project_template/
 │   ├── handler/             # HTTPリクエストの処理（エンドポイントの実装）
 │   ├── infrastructure/      # 外部サービスとのやりとりの実装
 │   │   └── db/              # データベースに関する処理
-│   │       ├── query/       # SQLクエリファイル
-│   │       ├── init.sql     # テーブル定義
-│   │       ├── migration.go # テーブルマイグレーション処理
-│   │       └── sqlc.yaml    # sqlcの設定ファイル
+│   │       ├── migration/   # マイグレーションファイル群
+│   │       └── seed/        # シードデータ群
 │   ├── repository/          # ドメインレイヤーのインターフェース定義
-│   ├── repository_impl/     # リポジトリインターフェースの具体実装
 │   ├── usecase/             # ビジネスロジック（ユースケース層）
 │   ├── go.mod               # Goモジュールの設定ファイル（依存関係の管理など）
 │   ├── tmp/                 # 一時ファイル置き場（airによるビルド結果など）
@@ -21,12 +18,13 @@ project_template/
 │       ├── bootstrap/       # 初期化処理（DB接続、環境変数の読み込みなど）
 │       └── router/          # エンドポイントルーティングの設定
 ├── frontend/                # Next.js製のフロントエンド
+│   ├── __tests__/           # テストコードファイル群
 │   ├── public/              # 画像などの静的アセット
 │   └── src/
 │       ├── app/             # App Router ディレクトリ（Next.jsのルーティング設定）
 │       ├── components/      # 再利用可能なReactコンポーネント群
 │       ├── hooks/           # カスタムReactフック
-│       ├── page/            # 画面単位のページコンポーネント
+│       ├── pages/           # 画面単位のページコンポーネント
 │       ├── provider/        # グローバル状態などのContextプロバイダー
 │       ├── recoil/          # Recoilの状態定義
 │       │   ├── atoms/       # 状態（Atom）の定義
