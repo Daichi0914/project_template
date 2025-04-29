@@ -1,12 +1,13 @@
-import './globals.css';
+import '../styles/globals.scss';
 import AppProvider from '../provider/AppProvider';
+import { ReactNode } from 'react';
 
 export const metadata = {
   title: 'Task Timer',
   description: 'Time tracking app',
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body>
