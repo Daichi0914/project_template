@@ -7,7 +7,7 @@ services:
       - "3000:3000"
     volumes:
       - ./frontend:/app
-      - ./frontend/node_modules:/app/node_modules
+      - /app/node_modules
     env_file:
       - .env
 
@@ -17,7 +17,7 @@ services:
       - "8080:8080"
     volumes:
       - ./backend:/app
-      - ./backend/tmp:/app/tmp
+      - /app/tmp
     env_file:
       - .env
     working_dir: /app
