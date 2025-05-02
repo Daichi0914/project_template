@@ -1,0 +1,7 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+### Makefinのコマンドを前提とすること
+### ファイルの最後には空行を1行追加すること

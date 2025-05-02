@@ -14,11 +14,14 @@ WORKDIR /app
 
 # go.mod, go.sum を先にコピー（キャッシュ効かせるため）
 COPY go.mod ./
-#COPY go.sum ./
+COPY go.sum ./
 RUN go mod download
 
 # ソースコードをコピー
 COPY . .
+
+# go mod tidyを実行して依存関係を整理
+RUN go mod tidy
 
 # ポート公開（例：8080を使う場合）
 EXPOSE 8080

@@ -1,16 +1,12 @@
-# ビルドする
+# ビルドしてupする
 build:
 	docker compose build
+	docker compose up -d
 
-# 再ビルドする
+# 再ビルドしてupする
 rebuild:
 	docker compose down -v
 	docker compose build --no-cache
-	docker compose up -d
-
-# build後にupする
-build_up:
-	docker compose build
 	docker compose up -d
 
 # 全コンテナを起動する
@@ -57,3 +53,11 @@ exec_db:
 # サンプルデータを作成する場合は`sample.sqlに必要なデータを記述した上で`make seed`を実行する
 seed:
 	set -a && source .env && set +a && docker compose exec -T db mysql -u$$DB_USER -p$$DB_PASSWORD $$DB_NAME < ./backend/infrastructure/db/seed/sample.sql
+
+# backendのテストを実行する
+test_be:
+	docker-compose exec backend go test -v ./...
+
+# frontendのテストを実行する
+test_fe:
+	docker-compose exec frontend npm test
