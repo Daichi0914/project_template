@@ -34,7 +34,6 @@ project_template/
 │       ├── app/             # App Router ディレクトリ（Next.jsのルーティング設定）
 │       ├── components/      # 再利用可能なReactコンポーネント群
 │       ├── hooks/           # カスタムReactフック
-│       ├── pages/           # 画面単位のページコンポーネント
 │       ├── provider/        # グローバル状態などのContextプロバイダー
 │       ├── recoil/          # Recoilの状態定義
 │       │   ├── atoms/       # 状態（Atom）の定義
