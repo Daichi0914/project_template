@@ -1,3 +1,13 @@
+## Getting Started
+1. このリポジトリをフォーク
+2. `Settings > General > Template repository Loading`にチェックをつける
+![Image](https://github.com/user-attachments/assets/617d2ae4-9248-4e1d-b37a-7d1f48e31ac2)
+3. 新規リポジトリ作成時、`Repository template`のリストから当該リポジトリを選択
+![Image](https://github.com/user-attachments/assets/b1937b9d-660b-4f1f-8f70-c7361a0766c3)
+4. `.env.copy`を複製し、`.env`ファイルにリネーム
+5. `.env`の環境変数に任意の値を入れる
+6. `make build_up`コマンドでプロジェクトコンテナ立ち上げ（Docker Desktopダウンロード必須）
+
 ## Project Structure
 ```
 project_template/
