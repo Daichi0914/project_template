@@ -39,6 +39,7 @@ func InitDB(cfg *config.Config) *sql.DB {
 		}
 
 		// 接続成功
+		log.Println("Connected to database successfully")
 		break
 	}
 
@@ -52,6 +53,5 @@ func InitDB(cfg *config.Config) *sql.DB {
 	db.SetMaxIdleConns(25)
 	db.SetConnMaxLifetime(5 * time.Minute)
 
-	log.Println("Connected to database successfully")
 	return db
 }

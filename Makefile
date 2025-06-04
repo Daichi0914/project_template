@@ -48,16 +48,23 @@ prune:
 
 # データベースに接続する
 exec_db:
-	set -a && source .env && set +a && docker compose exec db mysql -u$$DB_USER -p$$DB_PASSWORD $$DB_NAME
+	set -a && source .env.dev && set +a && docker compose exec $$MYSQL_HOST mysql -u$$MYSQL_USER -p$$MYSQL_PASSWORD $$MYSQL_DATABASE
+
+# テストデータベースに接続する
+exec_test_db:
+	set -a && source .env.test && set +a && docker compose exec $$MYSQL_HOST mysql -u$$MYSQL_USER -p$$MYSQL_PASSWORD $$MYSQL_DATABASE
 
 # サンプルデータを作成する場合は`sample.sqlに必要なデータを記述した上で`make seed`を実行する
-seed:
-	set -a && source .env && set +a && docker compose exec -T db mysql -u$$DB_USER -p$$DB_PASSWORD $$DB_NAME < ./backend/infrastructure/db/seed/sample.sql
+seed_dev:
+	set -a && source .env.dev && set +a && docker compose exec -T $$MYSQL_HOST mysql -u$$MYSQL_USER -p$$MYSQL_PASSWORD $$MYSQL_DATABASE < ./backend/infrastructure/db/seed/sample.sql
+
+seed_test:
+	set -a && source .env.test && set +a && docker compose exec -T $$MYSQL_HOST mysql -u$$MYSQL_USER -p$$MYSQL_PASSWORD $$MYSQL_DATABASE < ./backend/infrastructure/db/seed/sample.sql
 
 # backendのテストを実行する
 test_be:
-	docker-compose exec backend go test -v ./...
+	docker-compose exec backend_test go test -v ./...
 
 # frontendのテストを実行する
 test_fe:
-	docker-compose exec frontend npm test
+	docker-compose exec frontend_test npm test

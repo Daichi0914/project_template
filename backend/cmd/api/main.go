@@ -5,8 +5,6 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/joho/godotenv"
-
 	"project_template/backend/adapter/handler"
 	"project_template/backend/adapter/repository"
 	"project_template/backend/adapter/router"
@@ -17,12 +15,6 @@ import (
 )
 
 func main() {
-	// .envファイルの読み込み
-	if err := godotenv.Load(); err != nil {
-		log.Printf("Warning: .env file not found or could not be loaded: %v", err)
-		log.Println("Please make sure required environment variables are set in the environment")
-	}
-
 	// 設定の読み込み
 	cfg, err := config.NewConfig()
 	if err != nil {
