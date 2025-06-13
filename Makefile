@@ -13,6 +13,14 @@ rebuild:
 up:
 	docker compose up -d
 
+# devコンテナを起動する
+up-dev:
+	docker compose up -d $(shell docker compose config --services | grep dev);
+
+# testコンテナを起動する
+up-test:
+	docker compose up -d $(shell docker compose config --services | grep test);
+
 # コンテナを再起動する
 reup:
 	docker compose down -v

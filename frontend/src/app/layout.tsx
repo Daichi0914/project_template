@@ -1,5 +1,5 @@
-import '../styles/globals.scss';
-import AppProvider from '../provider/AppProvider';
+import '@/styles/globals.css';
+import AppProvider from '@/provider/AppProvider';
 import { ReactNode } from 'react';
 
 export const metadata = {
