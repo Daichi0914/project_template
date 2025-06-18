@@ -36,3 +36,19 @@ func NewUserOutput(user *entity.User) *UserOutput {
 		UpdatedAt: user.UpdatedAt,
 	}
 }
+
+// UsersOutput はユーザー一覧の出力データです
+type UsersOutput struct {
+	Users []*UserOutput `json:"users"`
+}
+
+// NewUsersOutput はエンティティのスライスからDTOへの変換を行います
+func NewUsersOutput(users []*entity.User) *UsersOutput {
+	userOutputs := make([]*UserOutput, len(users))
+	for i, user := range users {
+		userOutputs[i] = NewUserOutput(user)
+	}
+	return &UsersOutput{
+		Users: userOutputs,
+	}
+}

@@ -16,6 +16,7 @@ import (
 // UserInteractorInterface はユーザーインタラクターのインターフェースを定義します
 type UserInteractorInterface interface {
 	GetUser(ctx context.Context, input *dto.GetUserInput) (*dto.UserOutput, error)
+	GetUsers(ctx context.Context) (*dto.UsersOutput, error)
 	CreateUser(ctx context.Context, input *dto.CreateUserInput) (*dto.UserOutput, error)
 }
 
@@ -55,6 +56,30 @@ func (h *UserHandler) GetUser(w http.ResponseWriter, r *http.Request) {
 	// 名前のUTF-8検証と正規化
 	if output != nil {
 		output.Name = middleware.SanitizeString(output.Name)
+	}
+	
+	resp := middleware.NewJSONResponse(w)
+	resp.Encode(http.StatusOK, output)
+}
+
+// GetUsers はユーザー一覧を取得するハンドラーです
+func (h *UserHandler) GetUsers(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+
+	output, err := h.userInteractor.GetUsers(ctx)
+	if err != nil {
+		resp := middleware.NewJSONResponse(w)
+		resp.Encode(http.StatusInternalServerError, map[string]string{"error": "internal server error"})
+		return
+	}
+
+	// 各ユーザーの名前のUTF-8検証と正規化
+	if output != nil && output.Users != nil {
+		for _, user := range output.Users {
+			if user != nil {
+				user.Name = middleware.SanitizeString(user.Name)
+			}
+		}
 	}
 	
 	resp := middleware.NewJSONResponse(w)

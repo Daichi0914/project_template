@@ -26,6 +26,16 @@ reup:
 	docker compose down -v
 	docker compose up -d
 
+# devコンテナを再起動する
+reup-dev:
+	docker compose down -v
+	docker compose up -d $(shell docker compose config --services | grep dev);
+
+# testコンテナを再起動する
+reup-test:
+	docker compose down -v
+	docker compose up -d $(shell docker compose config --services | grep test);
+
 # コンテナのログを表示する
 logs:
 	docker compose logs -f

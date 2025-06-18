@@ -6,6 +6,7 @@ import (
 	"github.com/gorilla/mux"
 
 	"project_template/backend/adapter/handler"
+	"project_template/backend/adapter/middleware"
 )
 
 // Router はアプリケーションのルーターを設定します
@@ -24,10 +25,14 @@ func NewRouter(userHandler *handler.UserHandler) *Router {
 func (r *Router) Setup() *mux.Router {
 	router := mux.NewRouter()
 
+	// CORSミドルウェアを適用
+	router.Use(middleware.CORS)
+
 	// APIのバージョンプレフィックス
 	api := router.PathPrefix("/api/v1").Subrouter()
 
 	// ユーザー関連のエンドポイント
+	api.HandleFunc("/users", r.userHandler.GetUsers).Methods(http.MethodGet)
 	api.HandleFunc("/users", r.userHandler.CreateUser).Methods(http.MethodPost)
 	api.HandleFunc("/users/{id}", r.userHandler.GetUser).Methods(http.MethodGet)
 

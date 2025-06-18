@@ -72,6 +72,39 @@ func (r *UserRepository) FindByEmail(ctx context.Context, email string) (*entity
 	return &user, nil
 }
 
+// FindAll はすべてのユーザーを取得します
+func (r *UserRepository) FindAll(ctx context.Context) ([]*entity.User, error) {
+	query := "SELECT id, name, email, created_at, updated_at FROM users ORDER BY created_at DESC"
+	
+	rows, err := r.db.QueryContext(ctx, query)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var users []*entity.User
+	for rows.Next() {
+		var user entity.User
+		err := rows.Scan(
+			&user.ID,
+			&user.Name,
+			&user.Email,
+			&user.CreatedAt,
+			&user.UpdatedAt,
+		)
+		if err != nil {
+			return nil, err
+		}
+		users = append(users, &user)
+	}
+
+	if err = rows.Err(); err != nil {
+		return nil, err
+	}
+
+	return users, nil
+}
+
 // Create は新規ユーザーの保存を実装します
 func (r *UserRepository) Create(ctx context.Context, user *entity.User) error {
 	query := `INSERT INTO users (id, name, email, created_at, updated_at) 
