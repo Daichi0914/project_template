@@ -48,8 +48,6 @@ export function CreateUserForm() {
         throw new Error("ユーザーの作成に失敗しました")
       }
 
-      const data = await response.json()
-      console.log("作成されたユーザー:", data)
       form.reset()
     } catch (error) {
       console.error("エラー:", error)
