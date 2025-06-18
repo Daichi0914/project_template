@@ -1,13 +1,11 @@
 # ビルドしてupする
 build:
 	docker compose build
-	docker compose up -d
 
 # 再ビルドしてupする
 rebuild:
 	docker compose down -v
 	docker compose build --no-cache
-	docker compose up -d
 
 # 全コンテナを起動する
 up:
