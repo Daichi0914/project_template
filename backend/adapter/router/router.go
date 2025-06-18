@@ -32,9 +32,9 @@ func (r *Router) Setup() *mux.Router {
 	api := router.PathPrefix("/api/v1").Subrouter()
 
 	// ユーザー関連のエンドポイント
-	api.HandleFunc("/users", r.userHandler.GetUsers).Methods(http.MethodGet)
-	api.HandleFunc("/users", r.userHandler.CreateUser).Methods(http.MethodPost)
-	api.HandleFunc("/users/{id}", r.userHandler.GetUser).Methods(http.MethodGet)
+	api.HandleFunc("/users", r.userHandler.GetUsers).Methods(http.MethodGet, http.MethodOptions)
+	api.HandleFunc("/users", r.userHandler.CreateUser).Methods(http.MethodPost, http.MethodOptions)
+	api.HandleFunc("/users/{id}", r.userHandler.GetUser).Methods(http.MethodGet, http.MethodOptions)
 
 	// ヘルスチェック
 	router.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
