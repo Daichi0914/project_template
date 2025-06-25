@@ -15,12 +15,12 @@
     "@radix-ui/react-slot": "^1.2.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "jotai": "^2.12.5",
     "lucide-react": "^0.512.0",
     "next": "15.3.1",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-hook-form": "^7.57.0",
-    "recoil": "^0.7.7",
     "tailwind-merge": "^3.3.0",
     "zod": "^3.25.51"
   },

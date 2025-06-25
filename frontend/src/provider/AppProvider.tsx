@@ -1,12 +1,12 @@
 'use client';
 
 import React from 'react';
-import { RecoilRoot } from 'recoil';
+import { Provider } from 'jotai';
 
 export default function AppProvider({ children }: { children: React.ReactNode }) {
   return (
-    <RecoilRoot>
+    <Provider>
       {children}
-    </RecoilRoot>
+    </Provider>
   );
 }

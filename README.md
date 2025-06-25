@@ -47,7 +47,7 @@ project_template/
 │       │   ├── components/  # 再利用可能なReactコンポーネント群
 │       │   ├── hooks/       # カスタムReactフック
 │       │   ├── pages/       # ページコンポーネント（App Router使用時は省略可）
-│       │   └── state/       # 状態管理（Recoilなど）
+│       │   └── state/       # 状態管理（Jotaiなど）
 │       │       ├── atoms/   # 状態（Atom）の定義
 │       │       ├── selectors/# 派生状態（Selector）の定義
 │       │       └── effects/ # Atomに副作用を与えるEffectの定義
